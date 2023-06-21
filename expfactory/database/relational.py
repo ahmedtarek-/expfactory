@@ -190,8 +190,9 @@ def get_finished_experiments(self, session):
             Participant.id == subid
         ).first()  # better query here
 
+        print(p)
         # Get results for the participant
-        for result in Result.query.filter(participant_id=p.id):
+        for result in Result.query.filter(Participant.id == p.id):
             finished.append(result.exp_id)
     return finished
 
