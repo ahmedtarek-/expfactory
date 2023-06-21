@@ -64,7 +64,7 @@ class Participant(Base):
 class Result(Base):
     """a result is an experiment name, json dump, and datetime"""
 
-    __tablename__ = "result"
+    __tablename__ = "expfactory_result"
     id = Column(Integer, primary_key=True)
     date = Column(DateTime, default=func.now())
     data = Column(Text, nullable=False)
