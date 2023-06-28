@@ -192,7 +192,7 @@ def get_finished_experiments(self, session):
 
         print(p)
         # Get results for the participant
-        for result in Result.query.filter(Participant.id == p.id):
+        for result in Result.query.join(Participant).filter(Participant.id == p.id):
             finished.append(result.exp_id)
     return finished
 
@@ -230,6 +230,10 @@ def save_data(self, session, exp_id, content):
             # Preference is to save data under 'data', otherwise do all of it
             if "data" in content:
                 content = content["data"]
+
+            print("\n\n===================")
+            print(content)
+            print("===================\n\n")
 
             result = Result(
                 data=content, exp_id=exp_id, participant_id=p.id
