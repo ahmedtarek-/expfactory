@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 from sqlalchemy import Column, DateTime, Integer, String, Text, ForeignKey, func
+from sqlalchemy.dialects.mysql import LONGTEXT
 from sqlalchemy.orm import relationship, backref
 from expfactory.database import Base
 
@@ -67,6 +68,6 @@ class Result(Base):
     __tablename__ = "expfactory_result"
     id = Column(Integer, primary_key=True)
     date = Column(DateTime, default=func.now())
-    data = Column(Text, nullable=False)
+    data = Column(LONGTEXT, nullable=False)
     exp_id = Column(String(250), nullable=False)
     participant_id = Column(Integer, ForeignKey("participant.id"), nullable=False)
