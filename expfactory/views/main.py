@@ -58,10 +58,8 @@ def arc_tasks_landing():
     userid = request.args.get('user_id')
     experiment = request.args.get('experiment_id')
 
-    # Setting session user id (subid)
-    subid = userid
-    if subid is None:
-        subid = app.generate_subid()
+    # Generating a user in db
+    subid = app.generate_subid(username=username)
     session["subid"] = subid
 
     # Setting session username and experiment
