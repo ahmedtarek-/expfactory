@@ -51,7 +51,7 @@ import sys
 ################################################################################
 
 
-def generate_subid(self, username="undefined", external_id=0, token=None, return_user=False):
+def generate_subid(self, name="undefined", external_id=0, token=None, return_user=False):
     """generate a new user in the database, still session based so we
     create a new identifier.
     """
@@ -61,7 +61,7 @@ def generate_subid(self, username="undefined", external_id=0, token=None, return
         p = Participant()
     else:
         p = Participant(token=token)
-    p.name = username
+    p.name = name
     p.external_id = external_id
     self.session.add(p)
     self.session.commit()

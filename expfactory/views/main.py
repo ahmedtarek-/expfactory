@@ -55,11 +55,11 @@ from expfactory.forms import EntryForm
 def arc_tasks_landing():
     # Getting url params
     username = request.args.get('username')
-    userid = request.args.get('user_id')
+    user_id = request.args.get('user_id')
     experiment = request.args.get('experiment_id')
 
     # Generating a user in db
-    subid = app.generate_subid(username=username)
+    subid = app.generate_subid(name=username, external_id=user_id)
     session["subid"] = subid
 
     # Setting session username and experiment
