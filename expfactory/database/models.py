@@ -49,7 +49,7 @@ class Participant(Base):
     external_id = Column(Integer)
     token = Column(String(50))
     results = relationship(
-        "Result", lazy="select", backref=backref("participant", lazy="joined")
+        "Result", lazy="select", backref=backref("expfactory_participant", lazy="joined")
     )
 
     def __init__(self, name=None, token=None):
@@ -71,4 +71,4 @@ class Result(Base):
     date = Column(DateTime, default=func.now())
     data = Column(LONGTEXT, nullable=False)
     exp_id = Column(String(250), nullable=False)
-    participant_id = Column(Integer, ForeignKey("participant.id"), nullable=False)
+    participant_id = Column(Integer, ForeignKey("expfactory_participant.id"), nullable=False)
