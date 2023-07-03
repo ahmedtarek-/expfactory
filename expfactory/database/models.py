@@ -43,9 +43,10 @@ class Participant(Base):
     user generated without a token will have value of None
     """
 
-    __tablename__ = "participant"
+    __tablename__ = "expfactory_participant"
     id = Column(Integer, primary_key=True)
     name = Column(String(150))
+    external_id = Column(Integer)
     token = Column(String(50))
     results = relationship(
         "Result", lazy="select", backref=backref("participant", lazy="joined")
