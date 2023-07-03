@@ -49,6 +49,40 @@ import json
 
 from expfactory.forms import EntryForm
 
+# Landing with url params ######################################################################
+
+@app.route("/arc_tasks", methods=["GET"])
+def arc_tasks_landing():
+    # Getting url params
+    username = request.args.get('username')
+    userid = request.args.get('user_id')
+    experiment = request.args.get('experiment_id')
+
+    # Setting session user id (subid)
+    subid = userid
+    if subid is None:
+        subid = app.generate_subid()
+    session["subid"] = subid
+
+    # Setting session username and experiment
+    session["username"] = username
+    session["experiments"] = [experiment]  # list
+
+    # Setting whatever the fuck this is
+    app.randomize = "y"
+
+    # Whatever
+    flash(
+        'Participant ID: "%s" <br> Name %s <br> Randomize: "%s" <br> Experiments: %s'
+        % (subid, username, app.randomize, str(session["experiments"]))
+    )
+
+    # Logging
+    app.logger.info("Just landed as [user] %s" % username)
+    app.logger.info(session)
+
+    # Redirecting to start using current session
+    return redirect("/start")
 
 # LOGGING ######################################################################
 
