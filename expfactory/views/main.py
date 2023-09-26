@@ -164,7 +164,9 @@ def next():
         meta = app.lookup[experiment]
         experiment_path = meta.get("folder", experiment)
         app.logger.debug("Next experiment is %s" % experiment)
-        template = "/experiments/%s" % experiment_path
+
+        host_prefix = getenv("SCRIPT_NAME", default="")
+        template = "%s/experiments/%s" % (host_prefix, experiment_path)
 
         # Do we have runtime variables?
         token = session.get("token")
