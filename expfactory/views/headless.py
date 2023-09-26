@@ -31,7 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
 
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, url_for
 from expfactory.server import app
 
 from expfactory.forms import EntryForm
@@ -45,7 +45,7 @@ def login_get():
     # If not headless, we don't need to login
     if not app.headless:
         app.logger.debug("Not running in headless mode, redirect to /start.")
-        redirect("/start")
+        redirect(url_for("start"))
 
     subid = session.get("subid")
     if not subid:
@@ -60,7 +60,7 @@ def login_get():
             session["token"] = token
 
             app.logger.info("Logged in user [subid] %s" % subid)
-    return redirect("/next")
+    return redirect(url_for("next"))
 
 
 @app.route("/login", methods=["POST"])
@@ -72,7 +72,7 @@ def login():
     # If not headless, we don't need to login
     if not app.headless:
         app.logger.debug("Not running in headless mode, redirect to /start.")
-        redirect("/start")
+        redirect(url_for("start"))
 
     subid = session.get("subid")
     if not subid:
@@ -87,7 +87,7 @@ def login():
             session["token"] = token
 
             app.logger.info("Logged in user [subid] %s" % subid)
-    return redirect("/next")
+    return redirect(url_for("next"))
 
 
 # Denied Entry for Headless

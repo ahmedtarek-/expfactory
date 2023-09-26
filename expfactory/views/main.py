@@ -31,7 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
 
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, url_for
 
 from flask_wtf.csrf import generate_csrf
 from expfactory.defaults import EXPFACTORY_LOGS
@@ -80,7 +80,7 @@ def arc_tasks_landing():
     app.logger.info(session)
 
     # Redirecting to start using current session
-    return redirect("/start")
+    return redirect(url_for("start"))
 
 # LOGGING ######################################################################
 
@@ -118,7 +118,7 @@ def home():
                 os.path.basename(x) for x in app.experiments
             ]  # list
             return render_template("routes/entry.html", form=form)
-        return redirect("/next")
+        return redirect(url_for("next"))
 
     return portal()
 
@@ -176,7 +176,7 @@ def next():
 
         return perform_checks(template=template, do_redirect=True, next=experiment)
 
-    return redirect("/finish")
+    return redirect(url_for("/finish"))
 
 
 # Reset/Logout
@@ -185,7 +185,7 @@ def logout():
 
     # If the user has finished, clear session
     clear_session()
-    return redirect("/")
+    return redirect(url_for("home"))
 
 
 # Finish
@@ -202,7 +202,7 @@ def finish():
         app.finish_user(subid)
         clear_session()
         return render_template("routes/finish.html")
-    return redirect("/")
+    return redirect(url_for("home"))
 
 
 @app.route("/start")

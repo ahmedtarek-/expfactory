@@ -31,7 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
 
-from flask import flash, render_template, request, redirect, session
+from flask import flash, render_template, request, redirect, session, url_for
 from expfactory.server import app
 from expfactory.forms import ParticipantForm
 
@@ -64,7 +64,7 @@ def portal():
                 'Participant ID: "%s" <br> Name %s <br> Randomize: "%s" <br> Experiments: %s'
                 % (subid, username, app.randomize, str(form.exp_ids.data))
             )
-            return redirect("/start")
+            return redirect(url_for("start"))
 
         # Submit but not valid
         return render_template(

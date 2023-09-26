@@ -31,7 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
 
-from flask import flash, render_template, redirect, session
+from flask import flash, render_template, redirect, session, url_for
 
 
 def perform_checks(template, do_redirect=False, context=None, next=None, quiet=False):
@@ -63,7 +63,7 @@ def perform_checks(template, do_redirect=False, context=None, next=None, quiet=F
     # Headless mode requires token
     if "token" not in session and app.headless is True:
         flash("A token is required for these experiments.")
-        return redirect("/")
+        return redirect(url_for("home"))
 
     # Update the user / log
     if quiet is False:
@@ -73,15 +73,15 @@ def perform_checks(template, do_redirect=False, context=None, next=None, quiet=F
 
     if username is None and app.headless is False:
         flash("You must start a session before doing experiments.")
-        return redirect("/")
+        return redirect(url_for("home"))
 
     if subid is None:
         flash("You must have a participant identifier before doing experiments")
-        return redirect("/")
+        return redirect(url_for("home"))
 
     if next is None:
         flash("Congratulations, you have finished the battery!")
-        return redirect("/finish")
+        return redirect(url_for("finish"))
 
     if do_redirect is True:
         app.logger.debug("Redirecting to %s" % template)
