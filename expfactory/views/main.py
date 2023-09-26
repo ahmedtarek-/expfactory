@@ -35,7 +35,7 @@ from flask import render_template, request, redirect, session, url_for
 
 from flask_wtf.csrf import generate_csrf
 from expfactory.defaults import EXPFACTORY_LOGS
-from expfactory.utils import get_post_fields
+from expfactory.utils import get_post_fields, getenv
 
 from expfactory.variables import get_runtime_vars
 from expfactory.views.utils import perform_checks, clear_session
