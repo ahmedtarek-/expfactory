@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>The Experiment Factory</title>
 
-        <link rel="icon" type="image/png" href="/expfactory/static/img/favicon.ico">
-        <link href="/expfactory/static/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="/expfactory/static/css/style.css" rel="stylesheet" />
+        <link rel="icon" type="image/png" href="{{ url_for('static',filename='img/favicon.ico') }}">
+        <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet" />
+        <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet" />
         <link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
     
         <link href='https://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>
@@ -21,7 +21,7 @@
     <body>	
         <div class="loader">
             <div>
-                <img src="/expfactory/static/img/icons/preloader.gif" />
+                <img src="{{ url_for('static',filename='img/icons/preloader.gif') }}" />
             </div>
         </div>
     
@@ -32,7 +32,7 @@
       </div>
     
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-      <script src="/expfactory/static/js/bootstrap.min.js"></script>
+      <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
       <script>
       $(window).load(function() {
           $(".loader").fadeOut("slow");

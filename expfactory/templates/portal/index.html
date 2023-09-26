@@ -7,9 +7,9 @@
                     <div class="logo">
                         <h1>Stage</h1>
                     </div>
-                    <img src="/expfactory/static/img/expfactoryticketyellow.png" 
+                    <img src="{{ url_for('static',filename='img/expfactoryticketyellow.png') }}" 
                          style="width:50%; margin-bottom:50px;">
-                    <img src="/expfactory/static/img/tinypeople.png" 
+                    <img src="{{ url_for('static',filename='img/tinypeople.png') }}" 
                          style="width:100%; position: absolute; bottom: 0px; left:0px">             
                     <p><a class="expfactory-blue"
                           style="margin:auto"
@@ -125,7 +125,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <img src="/expfactory/static/img/icons/cancel.png">
+                        <img src="{{ url_for('static',filename='img/icons/cancel.png') }}">
                    </button>
                    <h4 class="modal-title">Your Battery</h4>
                </div>
