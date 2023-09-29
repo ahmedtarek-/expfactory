@@ -62,6 +62,10 @@ class Participant(Base):
     def url(self):
         """return the participant url"""
 
+    def __str__(self):
+        return "id: %s, name: %s, external_id: %s, token: %s" %
+            (self.id, self.name, self.external_id, self.token)
+
 
 class Result(Base):
     """a result is an experiment name, json dump, and datetime"""

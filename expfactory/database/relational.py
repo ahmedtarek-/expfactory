@@ -64,7 +64,13 @@ def generate_subid(self, name="undefined", external_id=0, token=None, return_use
     p.name = name
     p.external_id = external_id
     self.session.add(p)
-    self.session.commit()
+
+    try:
+        self.session.commit()
+    except pymysql.err.OperationalError:
+        print("-- Error occured while commiting the user data: %s") % (p)
+        # print("-- Trying again")
+        # self.session.commit()
     if return_user is True:
         return p
     return p.id
