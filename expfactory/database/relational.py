@@ -35,6 +35,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.exc import SQLAlchemyError
 
 import uuid
 import sys
@@ -67,7 +68,7 @@ def generate_subid(self, name="undefined", external_id=0, token=None, return_use
 
     try:
         self.session.commit()
-    except pymysql.err.OperationalError:
+    except SQLAlchemyError:
         print("-- Error occured while commiting the user data: %s") % (p)
         # print("-- Trying again")
         # self.session.commit()
