@@ -183,7 +183,7 @@ def next():
 
         return perform_checks(template=template, do_redirect=True, next=experiment)
 
-    return redirect(url_for("/finish"))
+    return redirect(url_for("finish"))
 
 
 # Reset/Logout
