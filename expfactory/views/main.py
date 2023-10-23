@@ -57,6 +57,7 @@ def arc_tasks_landing():
     username = request.args.get('username')
     user_id = request.args.get('user_id')
     experiment = request.args.get('experiment_id')
+    return_url = request.args.get('return_url')
 
     # Generating a user in db
     subid = app.generate_subid(name=username, external_id=user_id)
@@ -64,7 +65,9 @@ def arc_tasks_landing():
 
     # Setting session username and experiment
     session["username"] = username
+    session["ext_user_id"] = username
     session["experiments"] = [experiment]  # list
+    session["return_url"] = return_url
 
     # Setting whatever the fuck this is
     app.randomize = "y"
@@ -195,6 +198,7 @@ def logout():
 def finish():
 
     subid = session.get("subid")
+    return_url = session.get("return_url")
 
     # If the user has finished, clear session
     if subid is not None:
@@ -203,7 +207,8 @@ def finish():
         # Relational removes token so not accessible
         app.finish_user(subid)
         clear_session()
-        return render_template("routes/finish.html")
+        # return render_template("routes/finish.html")
+        return redirect(return_url)
     return redirect(url_for("home"))
 
 

@@ -47,9 +47,11 @@ $( document ).ready(function() {
 
                      $.ajax({
                          type: "POST",
-                         url: '/save',
+                         url: '/expfactory/save',
                          data: { "data": data },
-                         success: function(){ document.location = "/next" },
+                         success: function(){
+                            document.location = "/next"
+                            },
                          dataType: "application/json",
 
                          // Endpoint not running, local save
