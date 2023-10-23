@@ -59,6 +59,8 @@ def arc_tasks_landing():
     experiment = request.args.get('experiment_id')
     return_url = request.args.get('return_url')
 
+    print("DEBUG: ", return_url)
+
     # Generating a user in db
     subid = app.generate_subid(name=username, external_id=user_id)
     session["subid"] = subid
