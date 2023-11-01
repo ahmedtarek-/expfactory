@@ -68,10 +68,11 @@ def generate_subid(self, name="undefined", external_id=0, token=None, return_use
 
     try:
         self.session.commit()
-    except SQLAlchemyError:
-        print("-- Error occured while commiting the user data: %s") % (p)
-        # print("-- Trying again")
-        # self.session.commit()
+    except Exception as e:
+        print("-- Error occured while commiting the user data: ", p)
+        print("-- The error is:\n", e)
+        print("-- Trying again")
+        self.session.commit()
     if return_user is True:
         return p
     return p.id
@@ -272,7 +273,7 @@ def init_db(self):
         self.logger.error("You must provide a database url, exiting.")
         sys.exit(1)
 
-    self.engine = create_engine(self.database)
+    self.engine = create_engine(self.database, pool_pre_ping=True, pool_recycle=3600, pool_pre_ping=True)
     self.session = scoped_session(
         sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
     )
