@@ -273,7 +273,7 @@ def init_db(self):
         self.logger.error("You must provide a database url, exiting.")
         sys.exit(1)
 
-    self.engine = create_engine(self.database, pool_pre_ping=True, pool_recycle=3600, pool_pre_ping=True)
+    self.engine = create_engine(self.database, pool_pre_ping=True, pool_recycle=3600)
     self.session = scoped_session(
         sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
     )
